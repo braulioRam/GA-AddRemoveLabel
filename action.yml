@@ -1,0 +1,23 @@
+# action.yml
+name: 'AddRemoveLabel'
+description: 'Manage labels on GH pull requests'
+inputs:
+  token:
+    description: 'GH token'
+    required: true
+  add_label:
+    description: 'Label to add'
+    required: false
+  remove_label:
+    description: 'Label to remove'
+    required: false
+outputs:
+  time: # id of output
+    description: 'The time we greeted you'
+runs:
+  using: 'docker'
+  image: 'Dockerfile'
+  args:
+    - ${{ inputs.token }}
+    - ${{ inputs.add_label }}
+    - ${{ inputs.remove_label }}
