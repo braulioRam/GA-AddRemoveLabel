@@ -11,9 +11,6 @@ inputs:
   remove_label:
     description: 'Label to remove'
     required: false
-outputs:
-  time: # id of output
-    description: 'The time we greeted you'
 runs:
   using: 'docker'
   image: 'Dockerfile'
