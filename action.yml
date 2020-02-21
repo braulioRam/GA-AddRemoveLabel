@@ -2,19 +2,23 @@
 name: 'AddRemoveLabel'
 description: 'Manage labels on GH pull requests'
 inputs:
-  token:
+  GITHUB_TOKEN:
     description: 'GH token'
     required: true
-  add_label:
+  GITHUB_EVENT_PATH:
+    description: 'GH event path'
+    required: true
+  ADD_LABEL:
     description: 'Label to add'
     required: false
-  remove_label:
+  REMOVE_LABEL:
     description: 'Label to remove'
     required: false
 runs:
   using: 'docker'
   image: 'Dockerfile'
   args:
-    - ${{ inputs.token }}
-    - ${{ inputs.add_label }}
-    - ${{ inputs.remove_label }}
+    - ${{ inputs.GITHUB_TOKEN }}
+    - ${{ inputs.GITHUB_EVENT_PATH }}
+    - ${{ inputs.ADD_LABEL }}
+    - ${{ inputs.REMOVE_LABEL }}
