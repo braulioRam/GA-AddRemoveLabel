@@ -1,7 +1,7 @@
 #!/bin/sh -l
 
-NUMBER=$(jq --raw-output .pull_request.number "$2")
-REPO=$(jq --raw-output .repository.name "$2")
+NUMBER=$(jq --raw-output .pull_request.number "$GITHUB_EVENT_PATH")
+REPO=$(jq --raw-output .repository.name "$GITHUB_EVENT_PATH")
 
 
 if [[ -n $3 ]]; then
