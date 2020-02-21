@@ -1,2 +1,2 @@
 # GA-AddRemoveLabel
-Action to manage labels on Github events
+Action to manage labels on GitHub events
