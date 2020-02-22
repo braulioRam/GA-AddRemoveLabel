@@ -1,23 +1,24 @@
-#!/bin/sh -l
+#!/bin/bash -l
+
+set -e
 
 NUMBER=$(jq --raw-output .pull_request.number "$GITHUB_EVENT_PATH")
-REPO=$(jq --raw-output .repository.name "$GITHUB_EVENT_PATH")
 
 
-if [[ -n $3 ]]; then
+if [[ -n $ADD_LABEL ]]; then
     curl -sSL \
-      -H "Authorization: token $1" \
+      -H "Authorization: token ${GITHUB_TOKEN}" \
       -H "Accept: application/vnd.github.v3+json" \
       -X POST \
       -H "Content-Type: application/json" \
-      -d "{\"labels\":[\"$3\"]}" \
-      "https://api.github.com/repos/$REPO/issues/$NUMBER/labels"
+      -d "{\"labels\":[\"${ADD_LABEL}\"]}" \
+      "https://api.github.com/repos/${GITHUB_REPOSITORY}/issues/${NUMBER}/labels"
 fi
 
-if [[ -n $4 ]]; then
+if [[ -n $REMOVE_LABEL ]]; then
     curl -sSL \
-      -H "Authorization: token $1" \
+      -H "Authorization: token ${GITHUB_TOKEN}" \
       -H "Accept: application/vnd.github.v3+json" \
       -X DELETE \
-      "https://api.github.com/repos/$REPO/issues/$NUMBER/labels/$4"
+      "https://api.github.com/repos/${GITHUB_REPOSITORY}/issues/${NUMBER}/labels/${REMOVE_LABEL}"
 fi
